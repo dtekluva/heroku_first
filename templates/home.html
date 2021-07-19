@@ -1,0 +1,10 @@
+<h1>Welcome to IRIS prediction</h1>
+<h2>Please enter your flower measurements below:</h2>
+<form method=”POST”>
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    <br>
+    {{form.media}}
+    <br>
+    {{ form.submit() }}
+</form>
