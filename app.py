@@ -3,6 +3,7 @@ from time import sleep
 import os
 from flask import Flask, render_template, request, redirect, url_for, abort, \
     send_from_directory
+import json
 
 app = Flask(__name__)
 
@@ -19,6 +20,29 @@ def too_large(e):
 def index():
 
     return render_template('index.html',track= {} )
+
+@app.route('/get_data')
+def get_status():
+    
+    status_file = open("status.json")
+    status_data = status_file.read()
+    status_file.close()
+
+    status_data = json.loads(status_data)
+
+    return status_data
+
+@app.route('/post_data')
+def post_status():
+
+    status_file = open("status.json","w" )
+    data = request.args
+    status_data = json.dumps(data)
+    status_file.write(status_data)
+
+    status_file.close()
+
+    return data
 
 if __name__ == '__main__':
     app.run(debug=True)
