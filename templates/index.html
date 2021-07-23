@@ -93,8 +93,19 @@
     
     butttons.forEach(element => {
         element.addEventListener("click",(e=>{
-            let state = e.target.children[2].innerText;
-            console.log(state)
+
+          let state, target;
+
+            if (e.target.children.length>0){
+
+              target = e.target.children[2];
+            }
+            else{
+
+              target = e.target.parentElement.parentElement.children[2];
+            }
+
+            state = target.innerText;
 
             if (state == "ON"){
                 state = "OFF";
@@ -103,7 +114,7 @@
             }
             console.log(state)
 
-            e.target.children[2].innerText = state;
+            target.innerText = state;
             post_data();
 
         }))
